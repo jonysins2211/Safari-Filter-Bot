@@ -76,7 +76,7 @@ async def start(client, message):
                 photo=random.choice(PICS),
                 caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
                 reply_markup=reply_markup,
-                has_spoiler=True,
+                has_spoiler=False,
                 parse_mode=enums.ParseMode.HTML
             )
             return
@@ -101,7 +101,7 @@ async def start(client, message):
                 photo=random.choice(PICS),
                 caption=script.START_TXT.format(message.from_user.mention, temp.U_NAME, temp.B_NAME),
                 reply_markup=reply_markup,
-                has_spoiler=True,
+                has_spoiler=False,
                 parse_mode=enums.ParseMode.HTML
             )
             return
