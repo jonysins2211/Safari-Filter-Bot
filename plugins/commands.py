@@ -65,11 +65,11 @@ async def start(client, message):
                         InlineKeyboardButton('🍀 Hᴇʟᴘ 🍀', callback_data='help'),
                         InlineKeyboardButton('🤖 ᴀʙᴏᴜᴛ 🤖', callback_data='about')
                     ],[
-                        InlineKeyboardButton('🆓 ᴘʀᴇᴍɪᴜᴍ', callback_data="pm_reff"), 
-                        InlineKeyboardButton('✨ ʙᴜʏ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data="premium_info")
+                        InlineKeyboardButton(' ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ', url=f'https://t.me/MOVIE_LOVERZZ'), 
+                        InlineKeyboardButton('✨ ʙᴇꜱᴛ ᴅᴇᴀʟꜱ  ✨', url=f'https://t.me/Amazon_Flipkartt_Offers')
                     ]]
             reply_markup = InlineKeyboardMarkup(buttons)
-            m=await message.reply_sticker("CAACAgQAAxkBAAEKeqNlIpmeUoOEsEWOWEiPxPi3hH5q-QACbg8AAuHqsVDaMQeY6CcRojAE") 
+            m=await message.reply_sticker("CAACAgUAAxkBAAIM92hgPrj023Y2sqDODSMaEf3hn78fAAKfFwAC3yUIV0bvoS3kN2_4NgQ") 
             await asyncio.sleep(2)
             await m.delete()
             await message.reply_photo(
@@ -90,11 +90,11 @@ async def start(client, message):
                         InlineKeyboardButton('🍀 Hᴇʟᴘ 🍀', callback_data='help'),
                         InlineKeyboardButton('🤖 ᴀʙᴏᴜᴛ 🤖', callback_data='about')
                     ],[
-                        InlineKeyboardButton('🆓 ᴘʀᴇᴍɪᴜᴍ', callback_data="pm_reff"), 
-                        InlineKeyboardButton('✨ ʙᴜʏ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data="premium_info")
+                        InlineKeyboardButton(' ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ', url=f'https://t.me/MOVIE_LOVERZZ'), 
+                        InlineKeyboardButton('✨ ʙᴇꜱᴛ ᴅᴇᴀʟꜱ  ✨', url=f'https://t.me/Amazon_Flipkartt_Offers')
                     ]]
             reply_markup = InlineKeyboardMarkup(buttons)
-            m=await message.reply_sticker("CAACAgQAAxkBAAEKeqNlIpmeUoOEsEWOWEiPxPi3hH5q-QACbg8AAuHqsVDaMQeY6CcRojAE") 
+            m=await message.reply_sticker("CAACAgUAAxkBAAIM92hgPrj023Y2sqDODSMaEf3hn78fAAKfFwAC3yUIV0bvoS3kN2_4NgQ") 
             await asyncio.sleep(2)
             await m.delete()
             await message.reply_photo(
