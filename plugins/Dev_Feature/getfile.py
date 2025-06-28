@@ -24,7 +24,10 @@ async def getfile(client, message):
         genres = movie_details.get('genres', 'N/A')
         plot = movie_details.get('plot', 'N/A')
         year = movie_details.get('year', 'N/A')
-        
+
+        # ✅ Properly format rating
+        rating_str = f"{rating}/10" if rating.replace('.', '', 1).isdigit() else rating
+
         custom_link = f"https://t.me/{temp.U_NAME}?start=getfile-{file_name.replace(' ', '-').lower()}"
         safari_markup = InlineKeyboardMarkup([
             [InlineKeyboardButton("Get File 📁", url=custom_link)]
@@ -33,12 +36,12 @@ async def getfile(client, message):
             [InlineKeyboardButton("Yes", callback_data=f"post_yes_{file_name}"),
              InlineKeyboardButton("No", callback_data=f"post_no_{file_name}")]
         ])
-        
+
         caption = (
-            f"<b>🔖Title: {movie_title}</b>\n"
-            f"<b>🎬 Genres: {genres}</b>\n"
-            f"<b>⭐️ Rating: {rating}/10</b>\n"
-            f"<b>📆 Year: {year}</b>\n\n"
+            f"<b>🍿 Title: {movie_title}</b>\n"
+            f"<b>🎃 Genres: {genres}</b>\n"
+            f"<b>📆 Year: {year}</b>\n"
+            f"<b>⭐ Rating: {rating_str}</b>\n\n"
             f"📕 Story: {plot}"
         )
 
@@ -49,16 +52,15 @@ async def getfile(client, message):
                 reply_markup=safari_markup,
                 parse_mode=enums.ParseMode.HTML,
             )
-            await message.reply_text("Do you want to post this content on POST_CHANNELS?",
-                reply_markup=reply_markup)
         else:
             await message.reply_text(
                 caption,
                 reply_markup=safari_markup,
                 parse_mode=enums.ParseMode.HTML,
             )
-            await message.reply_text("Do you want to post this content on POST_CHANNELS?",
-                reply_markup=reply_markup)
+
+        await message.reply_text("Do you want to post this content on POST_CHANNELS?",
+                                 reply_markup=reply_markup)
     except Exception as e:
         await message.reply_text(f"Error: {str(e)}")
 
@@ -78,17 +80,20 @@ async def post_to_channels(client, callback_query):
         genres = movie_details.get('genres', 'N/A')
         plot = movie_details.get('plot', 'N/A')
         year = movie_details.get('year', 'N/A')
-        
+
+        # ✅ Properly format rating
+        rating_str = f"{rating}/10" if rating.replace('.', '', 1).isdigit() else rating
+
         custom_link = f"https://t.me/{temp.U_NAME}?start=getfile-{file_name.replace(' ', '-').lower()}"
         reply_markup = InlineKeyboardMarkup([
             [InlineKeyboardButton("Get File 📁", url=custom_link)]
         ])
 
         caption = (
-            f"<b>🔖Title: {movie_title}</b>\n"
-            f"<b>🎬 Genres: {genres}</b>\n"
-            f"<b>⭐️ Rating: {rating}/10</b>\n"
-            f"<b>📆 Year: {year}</b>\n\n"
+            f"<b>🍿 Title: {movie_title}</b>\n"
+            f"<b>🎃 Genres: {genres}</b>\n"
+            f"<b>📆 Year: {year}</b>\n"
+            f"<b>⭐ Rating: {rating_str}</b>\n\n"
             f"📕 Story: {plot}"
         )
 
@@ -111,7 +116,7 @@ async def post_to_channels(client, callback_query):
                     )
             except Exception as e:
                 await callback_query.message.reply_text(f"Error posting to channel {channel_id}: {str(e)}")
-        
+
         await callback_query.message.edit_text("Movie details successfully posted to channels.")
     
     elif action == "no":
