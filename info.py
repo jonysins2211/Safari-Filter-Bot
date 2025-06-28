@@ -63,7 +63,7 @@ COLLECTION_NAME = environ.get('COLLECTION_NAME', 'Safaribotts')
 STREAM_SITE = (environ.get('STREAM_SITE', 'sharedisklinks.com'))
 STREAM_API = (environ.get('STREAM_API', '587f94f0e0b1813a52aed61290af6ea79d6ee464'))
 STREAM_HTO = (environ.get('STREAMHTO', 'https://t.me/Hoe/69'))
-STREAM_MODE = is_enabled((environ.get('STREAM_MODE', "True")), False)
+STREAM_MODE = is_enabled((environ.get('STREAM_MODE', "False")), False)
 
 
 #verify site api and url
