@@ -886,7 +886,7 @@ async def pm_spoll_choker(bot, query):
                     InlineKeyboardButton('ᴜᴘʟᴏᴀᴅᴇᴅ ✅', callback_data=f"uploaded:{reqstr1}:{search}")
                 ],[
                     InlineKeyboardButton('ɪɴᴠᴀʟɪᴅ ғᴏʀᴍᴀᴛ🙅', callback_data=f"series:{reqstr1}:{search}"),
-                    InlineKeyboardButton('sᴇʟʟ ᴍɪsᴛᴇᴋ✍️', callback_data=f"spelling_error:{reqstr1}:{search}")
+                    InlineKeyboardButton('Spelling ᴍɪsᴛᴇᴋ✍️sᴇʟʟ ᴍɪsᴛᴇᴋ✍️', callback_data=f"spelling_error:{reqstr1}:{search}")
                 ],[
                     InlineKeyboardButton('⁉️ Close ⁉️', callback_data=f"close_data")
                 ]]
@@ -911,7 +911,7 @@ async def pm_spoll_choker(bot, query):
                     InlineKeyboardButton('ᴜᴘʟᴏᴀᴅᴇᴅ ✅', callback_data=f"uploaded:{reqstr1}:{search}")
                 ],[
                     InlineKeyboardButton('ɪɴᴠᴀʟɪᴅ ғᴏʀᴍᴀᴛ🙅', callback_data=f"series:{reqstr1}:{search}"),
-                    InlineKeyboardButton('sᴇʟʟ ᴍɪsᴛᴇᴋ✍️', callback_data=f"spelling_error:{reqstr1}:{search}")
+                    InlineKeyboardButton('Spelling ᴍɪsᴛᴇᴋ✍️', callback_data=f"spelling_error:{reqstr1}:{search}")
                 ],[
                     InlineKeyboardButton('⦉ ᴄʟᴏsᴇ ⦊️', callback_data=f"close_data")
                 ]]
@@ -1329,8 +1329,8 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     InlineKeyboardButton('🍀 Hᴇʟᴘ 🍀', callback_data='help'),
                     InlineKeyboardButton('🤖 ᴀʙᴏᴜᴛ 🤖', callback_data='about')
                 ],[
-                    InlineKeyboardButton('🆓 ᴘʀᴇᴍɪᴜᴍ ✨', callback_data="pm_reff"),
-                    InlineKeyboardButton('✨ ʙᴜʏ ᴘʀᴇᴍɪᴜᴍ ✨', callback_data="premium_info")
+                    InlineKeyboardButton(' ᴍᴀɪɴ ᴄʜᴀɴɴᴇʟ ', url=f'https://t.me/MOVIE_LOVERZZ'),
+                    InlineKeyboardButton('✨ ʙᴇꜱᴛ ᴅᴇᴀʟꜱ  ✨', url=f'https://t.me/Amazon_Flipkartt_Offers')
                  ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await client.edit_message_media(
