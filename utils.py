@@ -191,6 +191,7 @@ async def get_poster(query, bulk=False, id=False, file=None):
             plot = plot[0]
     else:
         plot = movie.get('plot outline') or "No plot available."
+
     else:
     # Trim if too long
     if plot and len(plot) > 800:
