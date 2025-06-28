@@ -1,5 +1,6 @@
 # This code has been modified by @Safaridev
 # Please do not remove this credit
+
 from fuzzywuzzy import process
 from imdb import IMDb
 from utils import temp
@@ -11,7 +12,7 @@ from database.ia_filterdb import get_search_results, get_all_files
 imdb = IMDb()
 
 async def ai_spell_check(chat_id, wrong_name):
-    try:  
+    try:
         async def search_movie(wrong_name):
             search_results = imdb.search_movie(wrong_name)
             movie_list = [movie['title'] for movie in search_results]
@@ -50,54 +51,54 @@ async def requests(client, message):
     user_id = message.from_user.id
 
     if not requested_movie:
-        await message.reply_text("🙅 (फिल्म रिक्वेस्ट करने के लिए कृपया फिल्म का नाम और साल साथ में लिखें\nकुछ इस तरह 👇\n<code>/request Pushpa 2021</code>")
+        await message.reply_text("🙅 To request a movie, please enter the movie name along with the year, like this 👇\n<code>/request Pushpa 2021</code>")
         return
 
     files, offset, total_results = await get_search_results(chat_id=message.chat.id, query=requested_movie)
 
-    if files: 
+    if files:
         file_name = files[0]['file_name']
-        await message.reply_text(f"🎥 {file_name}\n\nआपने जो मूवी रिक्वेस्ट की है वो ग्रुप में उपलब्ध हैं\n\nग्रुप लिंक = {GRP_LNK}")
+        await message.reply_text(f"🎥 {file_name}\n\nThe movie you requested is available in the group.\n\nGroup Link = {GRP_LNK}")
     else:
         closest_movie = await ai_spell_check(chat_id=message.chat.id, wrong_name=requested_movie)
         if closest_movie:
             files, offset, total_results = await get_search_results(chat_id=message.chat.id, query=closest_movie)
             if files:
                 file_name = files[0]['file_name']
-                await message.reply_text(f"🎥 {file_name}\n\nआपने जो मूवी रिक्वेस्ट की है वो ग्रुप में उपलब्ध हैं\n\nग्रुप लिंक = {GRP_LNK}")
+                await message.reply_text(f"🎥 {file_name}\n\nThe movie you requested is available in the group.\n\nGroup Link = {GRP_LNK}")
             else:
-                await message.reply_text(f"✅ आपकी फिल्म <b>{closest_movie}</b> हमारे एडमिन के पास भेज दिया गया है.\n\n🚀 जैसे ही फिल्म अपलोड होती हैं हम आपको मैसेज देंगे.\n\n📌 ध्यान दे - एडमिन अपने काम में व्यस्त हो सकते है इसलिए फिल्म अपलोड होने में टाइम लग सकता हैं")
+                await message.reply_text(f"✅ Your movie <b>{closest_movie}</b> has been sent to our admin.\n\n🚀 We'll message you as soon as the movie is uploaded.\n\n📌 Note - Admins may be busy, so uploading may take some time.")
                 await client.send_message(
                     REQ_CHANNEL,
-                    f"☏ #𝙍𝙀𝙌𝙐𝙀𝙎𝙏𝙀𝘿_𝘾𝙊𝙉𝙏𝙀𝙉𝙏 ☎︎\n\nʙᴏᴛ - {temp.B_NAME}\nɴᴀᴍᴇ - {message.from_user.mention} (<code>{message.from_user.id}</code>)\nRᴇǫᴜᴇꜱᴛ - <code>{closest_movie}</code>",
+                    f"☏ #REQUESTED_CONTENT ☎︎\n\nBot - {temp.B_NAME}\nName - {message.from_user.mention} (<code>{message.from_user.id}</code>)\nRequest - <code>{closest_movie}</code>",
                     reply_markup=InlineKeyboardMarkup(
                         [[
-                            InlineKeyboardButton('ɴᴏᴛ ʀᴇʟᴇᴀsᴇ 📅', callback_data=f"not_release:{user_id}:{requested_movie}"),
-                            InlineKeyboardButton('ɴᴏᴛ ᴀᴠᴀɪʟᴀʙʟᴇ 🙅', callback_data=f"not_available:{user_id}:{requested_movie}")
+                            InlineKeyboardButton('Not Released 📅', callback_data=f"not_release:{user_id}:{requested_movie}"),
+                            InlineKeyboardButton('Not Available 🙅', callback_data=f"not_available:{user_id}:{requested_movie}")
                         ],[
-                            InlineKeyboardButton('ᴜᴘʟᴏᴀᴅᴇᴅ ✅', callback_data=f"uploaded:{user_id}:{requested_movie}")
+                            InlineKeyboardButton('Uploaded ✅', callback_data=f"uploaded:{user_id}:{requested_movie}")
                         ],[
-                            InlineKeyboardButton('ɪɴᴠᴀʟɪᴅ ғᴏʀᴍᴀᴛ🙅', callback_data=f"series:{user_id}:{requested_movie}"),
-                            InlineKeyboardButton('sᴇʟʟ ᴍɪsᴛᴇᴋ✍️', callback_data=f"spelling_error:{user_id}:{requested_movie}")
+                            InlineKeyboardButton('Invalid Format 🙅', callback_data=f"series:{user_id}:{requested_movie}"),
+                            InlineKeyboardButton('Spelling Mistake ✍️', callback_data=f"spelling_error:{user_id}:{requested_movie}")
                         ],[
-                            InlineKeyboardButton('⦉ ᴄʟᴏsᴇ ⦊', callback_data=f"close_data")]
+                            InlineKeyboardButton('⦉ Close ⦊', callback_data=f"close_data")]
                         ])
                 )
         else:
-            await message.reply_text(f"✅ आपकी फिल्म <b>{requested_movie}</b> हमारे एडमिन के पास भेज दिया गया है.\n\n🚀 जैसे ही फिल्म अपलोड होती हैं हम आपको मैसेज देंगे.\n\n📌 ध्यान दे - एडमिन अपने काम में व्यस्त हो सकते है इसलिए फिल्म अपलोड होने में टाइम लग सकता हैं")
+            await message.reply_text(f"✅ Your movie <b>{requested_movie}</b> has been sent to our admin.\n\n🚀 We'll message you as soon as the movie is uploaded.\n\n📌 Note - Admins may be busy, so uploading may take some time.")
             await client.send_message(
                 REQ_CHANNEL,
-                f"📝 #REQUESTED_CONTENT 📝\n\nʙᴏᴛ - {temp.B_NAME}\nɴᴀᴍᴇ - {message.from_user.mention} (<code>{message.from_user.id}</code>)\nRᴇǫᴜᴇꜱᴛ - <code>{requested_movie}</code>",
+                f"📝 #REQUESTED_CONTENT 📝\n\nBot - {temp.B_NAME}\nName - {message.from_user.mention} (<code>{message.from_user.id}</code>)\nRequest - <code>{requested_movie}</code>",
                 reply_markup=InlineKeyboardMarkup(
                     [[
-                        InlineKeyboardButton('ɴᴏᴛ ʀᴇʟᴇᴀsᴇ 📅', callback_data=f"not_release:{user_id}:{requested_movie}"),
-                        InlineKeyboardButton('ɴᴏᴛ ᴀᴠᴀɪʟᴀʙʟᴇ 🙅', callback_data=f"not_available:{user_id}:{requested_movie}")
+                        InlineKeyboardButton('Not Released 📅', callback_data=f"not_release:{user_id}:{requested_movie}"),
+                        InlineKeyboardButton('Not Available 🙅', callback_data=f"not_available:{user_id}:{requested_movie}")
                     ],[
-                        InlineKeyboardButton('ᴜᴘʟᴏᴀᴅᴇᴅ ✅', callback_data=f"uploaded:{user_id}:{requested_movie}")
+                        InlineKeyboardButton('Uploaded ✅', callback_data=f"uploaded:{user_id}:{requested_movie}")
                     ],[
-                        InlineKeyboardButton('ɪɴᴠᴀʟɪᴅ ғᴏʀᴍᴀᴛ🙅', callback_data=f"series:{user_id}:{requested_movie}"),
-                        InlineKeyboardButton('sᴇʟʟ ᴍɪsᴛᴇᴋ✍️', callback_data=f"spelling_error:{user_id}:{requested_movie}")
+                        InlineKeyboardButton('Invalid Format 🙅', callback_data=f"series:{user_id}:{requested_movie}"),
+                        InlineKeyboardButton('Spelling Mistake ✍️', callback_data=f"spelling_error:{user_id}:{requested_movie}")
                     ],[
-                        InlineKeyboardButton('⦉ ᴄʟᴏsᴇ ⦊', callback_data=f"close_data")]
+                        InlineKeyboardButton('⦉ Close ⦊', callback_data=f"close_data")]
                     ])
             )
