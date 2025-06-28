@@ -135,7 +135,6 @@ async def is_subscribed(bot, user_id, channel_id):
 
 async def get_poster(query, bulk=False, id=False, file=None):
     if not id:
-        # https://t.me/GetTGLink/4183
         query = (query.strip()).lower()
         title = query
         year = re.findall(r'[1-2]\d{3}$', query, re.IGNORECASE)
@@ -148,30 +147,37 @@ async def get_poster(query, bulk=False, id=False, file=None):
                 year = list_to_str(year[:1]) 
         else:
             year = None
+
         movieid = imdb.search_movie(title.lower(), results=10)
         if not movieid:
             return None
+
         if year:
-            filtered=list(filter(lambda k: str(k.get('year')) == str(year), movieid))
+            filtered = list(filter(lambda k: str(k.get('year')) == str(year), movieid))
             if not filtered:
                 filtered = movieid
         else:
             filtered = movieid
-        movieid=list(filter(lambda k: k.get('kind') in ['movie', 'tv series'], filtered))
+
+        movieid = list(filter(lambda k: k.get('kind') in ['movie', 'tv series'], filtered))
         if not movieid:
             movieid = filtered
+
         if bulk:
             return movieid
         movieid = movieid[0].movieID
     else:
         movieid = query
+
     movie = imdb.get_movie(movieid)
+
     if movie.get("original air date"):
         date = movie["original air date"]
     elif movie.get("year"):
         date = movie.get("year")
     else:
         date = "N/A"
+
     plot = ""
     if not LONG_IMDB_DESCRIPTION:
         plot = movie.get('plot')
@@ -179,8 +185,13 @@ async def get_poster(query, bulk=False, id=False, file=None):
             plot = plot[0]
     else:
         plot = movie.get('plot outline')
+
     if plot and len(plot) > 800:
         plot = plot[0:800] + "..."
+
+    # ✅ Handle missing rating
+    raw_rating = movie.get("rating")
+    rating = str(raw_rating) if raw_rating is not None else "Not Rated"
 
     return {
         'title': movie.get('title'),
@@ -197,10 +208,10 @@ async def get_poster(query, bulk=False, id=False, file=None):
         "certificates": list_to_str(movie.get("certificates")),
         "languages": list_to_str(movie.get("languages")),
         "director": list_to_str(movie.get("director")),
-        "writer":list_to_str(movie.get("writer")),
-        "producer":list_to_str(movie.get("producer")),
-        "composer":list_to_str(movie.get("composer")) ,
-        "cinematographer":list_to_str(movie.get("cinematographer")),
+        "writer": list_to_str(movie.get("writer")),
+        "producer": list_to_str(movie.get("producer")),
+        "composer": list_to_str(movie.get("composer")),
+        "cinematographer": list_to_str(movie.get("cinematographer")),
         "music_team": list_to_str(movie.get("music department")),
         "distributors": list_to_str(movie.get("distributors")),
         'release_date': date,
@@ -208,8 +219,8 @@ async def get_poster(query, bulk=False, id=False, file=None):
         'genres': list_to_str(movie.get("genres")),
         'poster': movie.get('full-size cover url'),
         'plot': plot,
-        'rating': str(movie.get("rating")),
-        'url':f'https://www.imdb.com/title/tt{movieid}'
+        'rating': rating,
+        'url': f'https://www.imdb.com/title/tt{movieid}'
     }
 # https://github.com/odysseusmax/animated-lamp/blob/2ef4730eb2b5f0596ed6d03e7b05243d93e3415b/bot/utils/broadcast.py#L37
 
