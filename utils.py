@@ -222,7 +222,7 @@ async def get_poster(query, bulk=False, id=False, file=None):
         "distributors": list_to_str(movie.get("distributors")),
         'release_date': date,
         'year': movie.get('year'),
-        'genres': list_to_str(movie.get("genres")),
+        'genres': list_to_str(movie.get("genres")[:3]),  # Limit to top 3 genres
         'poster': movie.get('full-size cover url'),
         'plot': plot,
         'rating': rating,
