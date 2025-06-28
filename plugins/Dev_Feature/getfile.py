@@ -3,20 +3,9 @@
 from utils import temp
 from utils import get_poster
 from info import POST_CHANNELS
-from googletrans import Translator
 from pyrogram import Client, filters, enums
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-translator = Translator()
-
-async def get_hindi(plot):
-    try:
-        translated = translator.translate(plot, dest='hi')
-        return translated.text
-    except Exception as e:
-        print(f"Translation Error: {e}")
-        return plot
-        
 @Client.on_message(filters.command('getfile'))
 async def getfile(client, message):
     try:
@@ -35,45 +24,40 @@ async def getfile(client, message):
         genres = movie_details.get('genres', 'N/A')
         plot = movie_details.get('plot', 'N/A')
         year = movie_details.get('year', 'N/A')
-        hindi_plot = await get_hindi(plot)
         
         custom_link = f"https://t.me/{temp.U_NAME}?start=getfile-{file_name.replace(' ', '-').lower()}"
         safari_markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("Get File 📁", url=custom_link)
-        ]])
+            [InlineKeyboardButton("Get File 📁", url=custom_link)]
+        ])
         reply_markup = InlineKeyboardMarkup([
             [InlineKeyboardButton("Yes", callback_data=f"post_yes_{file_name}"),
              InlineKeyboardButton("No", callback_data=f"post_no_{file_name}")]
         ])
         
+        caption = (
+            f"<b>🔖Title: {movie_title}</b>\n"
+            f"<b>🎬 Genres: {genres}</b>\n"
+            f"<b>⭐️ Rating: {rating}/10</b>\n"
+            f"<b>📆 Year: {year}</b>\n\n"
+            f"📕 Story: {plot}"
+        )
+
         if poster:
             await message.reply_photo(
                 poster,
-                caption=(
-                    f"<b>🔖Title: {movie_title}</b>\n"
-                    f"<b>🎬 Genres: {genres}</b>\n"
-                    f"<b>⭐️ Rating: {rating}/10</b>\n"
-                    f"<b>📆 Year: {year}</b>\n\n"
-                    f"📕 Story: {hindi_plot}"
-                ),
+                caption=caption,
                 reply_markup=safari_markup,
                 parse_mode=enums.ParseMode.HTML,
             )
-            await message.reply_text("Do you want to post this content on POST_CAHNNELS ?",
+            await message.reply_text("Do you want to post this content on POST_CHANNELS?",
                 reply_markup=reply_markup)
         else:
             await message.reply_text(
-                (
-                    f"<b>🔖Title: {movie_title}</b>\n"
-                    f"<b>🎬 Genres: {genres}</b>\n"
-                    f"<b>⭐️ Rating: {rating}/10</b>\n"
-                    f"<b>📆 Year: {year}</b>\n\n"
-                    f"📕 Story: {hindi_plot}"
-                ),
+                caption,
                 reply_markup=safari_markup,
                 parse_mode=enums.ParseMode.HTML,
             )
-            await message.reply_text("Do you want to post this content on POST_CAHNNEL ?",
+            await message.reply_text("Do you want to post this content on POST_CHANNELS?",
                 reply_markup=reply_markup)
     except Exception as e:
         await message.reply_text(f"Error: {str(e)}")
@@ -94,38 +78,34 @@ async def post_to_channels(client, callback_query):
         genres = movie_details.get('genres', 'N/A')
         plot = movie_details.get('plot', 'N/A')
         year = movie_details.get('year', 'N/A')
-        hindi_plot = await get_hindi(plot)
         
         custom_link = f"https://t.me/{temp.U_NAME}?start=getfile-{file_name.replace(' ', '-').lower()}"
         reply_markup = InlineKeyboardMarkup([
-            [InlineKeyboardButton("Get File 📁", url=custom_link)
-        ]])
+            [InlineKeyboardButton("Get File 📁", url=custom_link)]
+        ])
+
+        caption = (
+            f"<b>🔖Title: {movie_title}</b>\n"
+            f"<b>🎬 Genres: {genres}</b>\n"
+            f"<b>⭐️ Rating: {rating}/10</b>\n"
+            f"<b>📆 Year: {year}</b>\n\n"
+            f"📕 Story: {plot}"
+        )
+
         for channel_id in POST_CHANNELS:
             try:
                 if poster:
                     await client.send_photo(
                         chat_id=channel_id,
                         photo=poster,
-                        caption=(
-                            f"<b>🔖Title: {movie_title}</b>\n"
-                            f"<b>🎬 Genres: {genres}</b>\n"
-                            f"<b>⭐️ Rating: {rating}/10</b>\n"
-                            f"<b>📆 Year: {year}</b>\n\n"
-                            f"📕 Story: {hindi_plot}"
-                        ),
+                        caption=caption,
                         reply_markup=reply_markup,
                         parse_mode=enums.ParseMode.HTML
                     )
                 else:
                     await client.send_message(
                         chat_id=channel_id,
-                        text=(
-                            f"<b>🔖Title: {movie_title}</b>\n"
-                            f"<b>🎬 Genres: {genres}</b>\n"
-                            f"<b>⭐️ Rating: {rating}/10</b>\n"
-                            f"<b>📆 Year: {year}</b>\n\n"
-                            f"📕 Story: {hindi_plot}"
-                        ),
+                        text=caption,
                         reply_markup=reply_markup,
                         parse_mode=enums.ParseMode.HTML
                     )
