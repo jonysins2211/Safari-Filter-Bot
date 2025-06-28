@@ -173,7 +173,7 @@ async def get_poster(query, bulk=False, id=False, file=None):
     movie = imdb.get_movie(movieid, info=['main', 'vote details'])
 
     # ✅ Debug: Print what's coming from IMDb
-    print(f"[DEBUG] {movie.get('title')} | Rating: {movie.get('rating')} | ID: {movie.movieID}")
+  #  print(f"[DEBUG] {movie.get('title')} | Rating: {movie.get('rating')} | ID: {movie.movieID}")
 
     # 📆 Release Date
     if movie.get("original air date"):
