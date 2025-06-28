@@ -186,14 +186,15 @@ async def get_poster(query, bulk=False, id=False, file=None):
     # 🧾 Plot Handling
     plot = ""
     if not LONG_IMDB_DESCRIPTION:
-        plot = movie.get('plot')
-        if plot and len(plot) > 0:
+        plot_list = movie.get('plot')
+        if plot_list and len(plot_list) > 0:
             plot = plot[0]
     else:
-        plot = movie.get('plot outline')
-
+        plot = movie.get('plot outline') or "No plot available."
+    else:
+    # Trim if too long
     if plot and len(plot) > 800:
-        plot = plot[0:800] + "..."
+    plot = plot[0:800] + "..."
 
     # 🌟 Rating with fallback
     raw_rating = movie.get("rating")
