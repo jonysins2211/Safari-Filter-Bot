@@ -32,7 +32,7 @@ TIMEZONE = "Asia/KKolkata"
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client, message):
     try: 
-        await message.react(emoji=random.choice(REACTION), big=True)
+        await message.react(emoji=random.choice(REACTION), big=False)
         user_id = message.from_user.id
         send_count = await db.files_count(message.from_user.id, "send_all") or 0
         files_counts = await db.files_count(message.from_user.id, "files_count") or 0
