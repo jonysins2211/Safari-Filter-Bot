@@ -1,6 +1,6 @@
 class script(object):
     START_TXT = """<b><i>ʜᴇʏ 😎</i></b> {},
-<b><blockquote>Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ Bᴏᴛ.🥰
+<b><blockquote>Iᴍ Tʜᴇ Mᴏsᴛ Aᴅᴠᴀɴᴄᴇ Aɪ Pᴏᴡᴇʀᴅ Bᴏᴛ.
 Jᴜꜱᴛ Sᴇɴᴅ Mᴇ Aɴʏ Mᴏᴠɪᴇꜱ & Sᴇʀɪᴇꜱ Nᴀᴍᴇ Aɴᴅ Sᴇᴇ Mʏ Pᴏᴡᴇʀ.</b></blockquote>
 
 <b><spoiler>🔋 ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ - <a href=https://t.me/MOVIE_LOVERZZ>Movie Loverz</b></spoiler></a>"""
@@ -224,7 +224,7 @@ Money heist S0E01
 ⭐ Rating: {rating} / 10</b> """
     
     CHANNELS = """
-<b>ᴊᴏɪɴ ᴛʜɪs ᴄʜᴀɴɴᴇʟ ғᴏʀ ʀᴇᴘᴏ ᴜᴘᴅᴀᴛᴇs </b>"""
+<b>ᴊᴏɪɴ ᴛʜɪs ᴄʜᴀɴɴᴇʟ ғᴏʀ Movies ᴜᴘᴅᴀᴛᴇs </b>"""
     
     STATUS_TXT = """<b>    
 ‣ ᴛᴏᴛᴀʟ ꜰɪʟᴇꜱ : <code>{}</code>
@@ -249,9 +249,6 @@ Money heist S0E01
 • /imdb  - ɢᴇᴛ ᴛʜᴇ ꜰɪʟᴍ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ꜰʀᴏᴍ ɪᴍᴅʙ ꜱᴏᴜʀᴄᴇ.
 • /search  - ɢᴇᴛ ᴛʜᴇ ꜰɪʟᴍ ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ꜰʀᴏᴍ ᴠᴀʀɪᴏᴜꜱ ꜱᴏᴜʀᴄᴇꜱ.
 • /request - sᴇɴᴅ ᴀ Mᴏᴠɪᴇ/Sᴇʀɪᴇs ʀᴇᴏ̨ᴜᴇsᴛ ᴛᴏ ʙᴏᴛ ᴀᴅᴍɪɴs. ( ᴏɴʟʏ ᴡᴏʀᴋs ᴏɴ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ )
-• /plans - ᴄʜᴇᴄᴋ ᴀᴠᴀɪʟᴀʙʟᴇ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ ᴘʟᴀɴꜱ.
-• /myplan - ᴄʜᴇᴄᴋ ʏᴏᴜʀ ᴄᴜʀʀᴜɴᴛ ᴘʟᴀɴ.
-• /redeem - ʀᴇᴅᴇᴇᴍ ʙᴏᴛ ᴘʀᴇᴍɪᴜᴍ ᴄᴏᴅᴇ
 • /sticker_id - ᴛᴇʟᴇɢʀᴀᴍ sᴛɪᴄᴋᴇʀ ɪᴅ
 """
 
@@ -345,7 +342,7 @@ Money heist S0E01
     UPI_TXT = """<b>   
 ⚜️ ᴘᴀʏ ᴀᴍᴍᴏᴜɴᴛ ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ʏᴏᴜʀ ᴘʟᴀɴ ᴀɴᴅ ᴇɴᴊᴏʏ ᴘʀᴇᴍɪᴜᴍ ᴍᴇᴍʙᴇʀꜱʜɪᴘ !
 
-💵 ᴜᴘɪ ɪᴅ - <code>JEETUBIND@paytm</code>
+💵 ᴜᴘɪ ɪᴅ - <code>JEETUBND@ytm</code>
 
 ‼️ ᴍᴜsᴛ sᴇɴᴅ sᴄʀᴇᴇɴsʜᴏᴛ ᴀғᴛᴇʀ ᴘᴀʏᴍᴇɴᴛ
 <i>पेमेंट होने के बाद हमे स्क्रीन शॉट भेजें</i>.</b>"""
