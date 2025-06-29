@@ -133,7 +133,7 @@ async def reply_stream(client, message):
 async def pm_text(bot, message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
-    await message.react(emoji=random.choice(REACTION), big=True)
+    await message.react(emoji=random.choice(REACTION), big=False)
     if message.text.startswith("/") or message.text.startswith("#"): return
     if await db.get_setting("PM_FILTER", default=PM_FILTER) or await db.has_premium_access(message.from_user.id):
         await auto_filter(bot, message)
@@ -148,7 +148,7 @@ async def pm_text(bot, message):
 async def give_filter(bot, message):
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)  
-    await message.react(emoji=random.choice(REACTION), big=True)
+    await message.react(emoji=random.choice(REACTION), big=False)
     is_verified = await db.check_group_verification(message.chat.id)
     is_rejected = await db.rejected_group(message.chat.id)
     user = await bot.get_chat_member(message.chat.id, message.from_user.id)
