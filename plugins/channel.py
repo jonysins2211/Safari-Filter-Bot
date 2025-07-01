@@ -37,7 +37,6 @@ async def media(bot, message):
         "Marathi": "Marathi",
         "Gujarati": "Gujarati",
         "Punjabi": "Punjabi"
-        
     }
 
     for file_type in ("document", "video", "audio"):
@@ -50,12 +49,12 @@ async def media(bot, message):
     media.file_type = file_type
     media.caption = message.caption
     success, file_id = await save_file(media)
-    
+
     if success and file_id:
         file_details = await get_file_details(file_id)
         if file_details:
             file_id = file_details[0]['file_id']
-            
+
     if success and "post count" in (media.caption or "").lower():
         post_active = True
         collected_files = []
@@ -67,14 +66,15 @@ async def media(bot, message):
         collected_files.append((file_id, media.file_name.replace('_', ' '), updated_caption, media.file_size))
 
     if success and "send post" in (media.caption or "").lower():
-        post_active = False 
+        post_active = False
 
         if collected_files:
             imdb_info = None
 
             for file_id, file_name, caption, file_size in collected_files:
                 size_text = get_size(file_size)
-                file_url = f"📁 [{size_text}]👇\n<a href='https://t.me/{temp.U_NAME}?start=files_{CHANNELS[0]}_{file_id}'>{file_name}</a>"
+                # 👇 CLICK HERE button with bold
+                file_url = f"📁 [{size_text}] 👉 <a href='https://t.me/{temp.U_NAME}?start=files_{CHANNELS[0]}_{file_id}'><b>CLICK HERE</b></a>"
 
                 if imdb_info is None:
                     try:
@@ -95,11 +95,17 @@ async def media(bot, message):
                 description = imdb_info.get('plot', 'N/A')
                 poster_url = imdb_info.get('poster', None)
                 year = imdb_info.get('year', 'N/A')
-                
-                urls_text = "\n\n".join([f"📁 [{get_size(size)}]👇\n<a href='https://t.me/{temp.U_NAME}?start=files_{CHANNELS[0]}_{file_id}'>{file_name}</a>" for file_id, file_name, caption, size in collected_files])
+
+                urls_text = "\n\n".join([
+                    f"📁 [{get_size(size)}] 👉 <a href='https://t.me/{temp.U_NAME}?start=files_{CHANNELS[0]}_{file_id}'><b>CLICK HERE</b></a>"
+                    for file_id, file_name, caption, size in collected_files
+                ])
 
                 language_in_caption = caption.split("Language:")[-1].strip()
-                final_caption = f"<b>🏷 Title: {title}\n🎭 Genres: {genre}\n📆 Year: {year}\n🌟 Rating: {rating}\n🔊 Language: {language_in_caption}\n\n{urls_text}</b>"
+                final_caption = (
+                    f"<b>🏷 Title: {title}\n🎭 Genres: {genre}\n📆 Year: {year}\n"
+                    f"🌟 Rating: {rating}\n🔊 Language: {language_in_caption}\n\n{urls_text}</b>"
+                )
 
                 for channel in POST_CHANNELS:
                     if poster_url:
@@ -118,7 +124,10 @@ async def media(bot, message):
                                 parse_mode=enums.ParseMode.HTML
                             )
                     else:
-                        url_text = "\n\n".join([f"📁 [{get_size(size)}]👇\n<a href='https://t.me/{temp.U_NAME}?start=files_{CHANNELS[0]}_{file_id}'>{file_name}</a>" for file_id, file_name, caption, size in collected_files])
+                        url_text = "\n\n".join([
+                            f"📁 [{get_size(size)}] 👉 <a href='https://t.me/{temp.U_NAME}?start=files_{CHANNELS[0]}_{file_id}'><b>CLICK HERE</b></a>"
+                            for file_id, file_name, caption, size in collected_files
+                        ])
                         captionn = f"<b>#Information_Not_Available\n\nTotal Files: {len(collected_files)}\n\n{url_text}</b>"
                         await bot.send_message(
                             chat_id=channel,
