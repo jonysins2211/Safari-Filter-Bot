@@ -104,7 +104,7 @@ async def media(bot, message):
                 language_in_caption = caption.split("Language:")[-1].strip()
                 final_caption = (
                     f"<b><blockquote>🏷 Title: {title}\n🎭 Genres: {genre}\n📆 Year: {year}\n"
-                    f"🌟 Rating: {rating}/10\n🔊 Language: {language_in_caption}\n\n{urls_text}</blockquote></b>"
+                    f"🌟 Rating: {rating}/10\n🔊 Language: {language_in_caption}</blockquote>\n\n{urls_text}</b>"
                 )
 
                 for channel in POST_CHANNELS:
