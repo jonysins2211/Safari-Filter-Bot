@@ -219,7 +219,8 @@ async def start(client, message):
                     logger.error("Make sure Bot is admin in Forcesub channel")
                     return
                 btn = [[
-                    InlineKeyboardButton("⛔️ ᴊᴏɪɴ ɴᴏᴡ ⛔️", url=invite_link.invite_link)
+                    InlineKeyboardButton("⛔️ Amazon &Flipkart best offers ⛔️", url="https://t.me/Amazon_Flipkartt_Offers"),
+                    InlineKeyboardButton("⛔️ Main Channel ⛔️", url=invite_link.invite_link)
                 ]]
                 if message.command[1] != "subscribe":
                     if data.startswith("allfiles"):
@@ -239,7 +240,8 @@ async def start(client, message):
             if settings.get('fsub_id', AUTH_CHANNEL) and not await is_subscribed(client, message.from_user.id, channel):
                 invite_link = await client.create_chat_invite_link((channel), creates_join_request=True)
                 btn = [[
-                        InlineKeyboardButton("⛔️ ᴊᴏɪɴ ɴᴏᴡ ⛔️", url=invite_link.invite_link)
+                        InlineKeyboardButton("⛔️ Amazon & Flipkart best offers ⛔️", url="https://t.me/Amazon_Flipkartt_Offers"),
+                        InlineKeyboardButton("⛔️ Main Channel ⛔️", url=invite_link.invite_link)
                       ]]
                 if message.command[1] != "subscribe":
                     if data.startswith("allfiles"):
